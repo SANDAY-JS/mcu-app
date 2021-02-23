@@ -1,0 +1,267 @@
+// Imports
+@import url("https://fonts.googleapis.com/css2?family=Adamina&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400&display=swap");
+
+// Variables
+$bgColor: #555454;
+$bgColorTwo: #121412;
+$txtColor: #fafafa;
+$desBgColorOne: #a4000b;
+$desBgColorTwo: #5a0309;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  list-style: none;
+  text-decoration: none;
+}
+
+html,
+body {
+  font-size: 0.65rem;
+  font-family: "Adamina", serif;
+  max-height: 100vh;
+  overflow: hidden;
+  background: linear-gradient(450deg, $bgColor, $bgColorTwo);
+  user-select: none;
+}
+
+body {
+  position: relative;
+  &::after {
+    content: "© Marvel/Disney Corp.";
+    position: fixed;
+    bottom: 5px;
+    right: 5px;
+    font-size: 0.6rem;
+    color: #eee;
+  }
+  &.show-search-results {
+    overflow-y: scroll;
+  }
+}
+
+.ma-hide {
+  display: none !important;
+}
+
+.above-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: calc(20vh - 100px);
+  z-index: 1000;
+  user-select: all;
+  #searchBox {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 5vh;
+    left: 50%;
+    width: 50%;
+    outline: none;
+    border-radius: 5px;
+    border: 1px solid $txtColor;
+    background: #555454;
+    color: $txtColor;
+    padding: 0 1rem;
+    font-size: 26px;
+    user-select: all;
+    &:focus {
+      border: 2px solid $desBgColorTwo;
+    }
+  }
+  #searchBtn {
+    position: absolute;
+    transform: translate(0%, -50%);
+    top: 5vh;
+    left: 76%;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: transparent;
+    z-index: 100;
+  }
+  i {
+    position: absolute;
+    transform: translate(-100%, -50%) rotateY(180deg);
+    top: 5vh;
+    left: 74%;
+    color: $txtColor;
+    font-size: 2rem;
+  }
+}
+
+// Movie Des
+.movie-des-box {
+  position: fixed;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  background: linear-gradient(450deg, $desBgColorOne, $desBgColorTwo);
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  width: 95%;
+  max-height: 80vh;
+  z-index: 100000;
+  padding: 4rem 2rem;
+  border: 3px solid $txtColor;
+  border-radius: 15px;
+  overflow-y: scroll;
+  &.show {
+    display: flex;
+  }
+  img {
+    width: 100%;
+    height: auto;
+    margin-bottom: 15px;
+    border-radius: 5px;
+  }
+  h4 {
+    font-size: 1.6rem;
+    font-family: "Noto Serif JP", serif;
+    line-height: 1.6;
+    color: $txtColor;
+    cursor: default;
+    width: 100%;
+  }
+  span {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 2rem;
+    right: 0.4rem;
+    color: $txtColor;
+    font-size: 3.2rem;
+    cursor: pointer;
+  }
+}
+
+.card-container {
+  height: 100vh;
+  min-width: 300vw;
+  max-width: auto;
+  display: flex;
+  align-items: center;
+  transform: translateX(0);
+  transition: transform 0.3s ease-out;
+  cursor: grab;
+  &.grabbing {
+    cursor: grabbing;
+
+    .card-item img {
+      transform: scale(0.95);
+    }
+  }
+}
+.card-item {
+  position: relative;
+  min-width: calc(100vw - 0.333px);
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  h2 {
+    font-weight: bolder;
+    color: $txtColor;
+    font-size: 3rem;
+    text-align: center;
+    height: 110px;
+    line-height: 1.2;
+    display: flex;
+    align-items: center;
+  }
+  img {
+    height: 80%;
+    width: auto;
+    max-width: 100%;
+    transition: transform 0.3s ease-in-out;
+    border-radius: 3px;
+  }
+}
+
+.search-results-box {
+  display: none;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  width: 95%;
+  margin: 0 auto;
+  margin-top: 10vh;
+  overflow-y: auto;
+  .card-item {
+    min-width: unset;
+    width: 45%;
+    height: auto;
+    margin-bottom: 2rem;
+    h2 {
+      font-size: 1.85rem;
+      height: 60px;
+    }
+  }
+  &.search-results-show {
+    display: flex;
+  }
+  h5 {
+    // Not Found ↓
+    color: #fafafa;
+    font-size: 2.4rem;
+    text-align: center;
+  }
+}
+
+.bottom-container {
+  position: fixed;
+  bottom: 40px;
+  left: 0;
+  width: 100%;
+  ul {
+    padding: 0 1rem;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    li {
+      position: relative;
+      flex: 1;
+      color: $txtColor;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      cursor: pointer;
+      &.current-phase {
+        &::after {
+          content: "";
+          display: inline-block;
+          width: 60%;
+          height: 2px;
+          background-color: #fafafa;
+          position: absolute;
+          bottom: 0px;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .search-results-box {
+    .card-item {
+      width: 30%;
+      img {
+        width: 100%;
+      }
+    }
+  }
+  .movie-des-box {
+    width: 40%;
+    height: auto;
+  }
+  .bottom-container {
+    bottom: 1rem;
+  }
+}
