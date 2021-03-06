@@ -228,7 +228,7 @@ body.show-search-results {
 }
 
 .card-item img {
-  height: 80%;
+  height: auto;
   width: auto;
   max-width: 100%;
   -webkit-transition: -webkit-transform 0.3s ease-in-out;
@@ -330,6 +330,9 @@ body.show-search-results {
 }
 
 @media screen and (min-width: 768px) {
+  .card-item img{
+    height: 80%; 
+  }
   .search-results-box .card-item {
     width: 30%;
   }
